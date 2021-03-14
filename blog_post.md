@@ -9,7 +9,7 @@
 
 It is 2021, we are in the middle of a pandemic. We have waited for them for months, and now they are here: the vaccines against Covid-19. But besides the hope for the end of this pandemic, they brought doubts and worries: "Do they really work?", "I've heard that some people died from it.", "How bad are the side effects?"
 
-So what else can we do other than carefully evaluating all the news articles, explanations from virologists and other experts or reading studies on that matter? We can look at real data and get a feeling for it. And this ist what I will show you here with a dataset that contains possible side effects of the Covid-19 vaccinations.
+So what else can we do other than carefully evaluating all the news articles, explanations from virologists and other experts or reading studies on that matter? We can look at real data and get a feeling for it. And this is what I will show you here with a dataset that contains possible side effects of the Covid-19 vaccinations.
 
 This is not a tutorial on how to analyze data with Python (although you can look at my code at the end of this article). Instead, I will focus on how to critically look at the data and what we can or cannot interpret based on it.
 
@@ -63,7 +63,7 @@ So what does that mean, does the vaccination lead to an Covid infection or even 
 When we look at the frequencies, we have to keep in mind that
 * it's a very small data set compared to the population of vaccinated persons
 * we don't know the real cause of these symptoms
-* the dataset is likely to be biased because not all persons who experienced light symptoms might have rated them as adverse reactions 
+* the dataset is likely to be biased because not all persons who experienced light symptoms might have rated them as adverse reactions while death is a clear symptom which is better documented so that the estimated numbers should be lower for this symptom 
 * we don't have an unvaccinated control group here to compare the symptoms to
 
 So there is a lot that we don't know. But what do we know?  
@@ -81,6 +81,10 @@ This is the resulting overview of the most common symptoms for all patients that
 
 <p align="center"> 
     <img src="plots/common_symptoms_no_covid.png" alt="Most common symptoms excluding positive Covid test">
+    <br>
+    <em>Symptoms for patients not tested positive for Covid-19 shown in blue,</em>
+    <br>
+    <em> difference to all patients shown in orange</em>
  </p>
 
 Only slight changes can be observed, so the data from persons tested positive for Covid-19 seem not to have influenced the overall tendencies for the frequency of the symptoms. 
@@ -104,13 +108,13 @@ While so far the overview shows mainly lighter symptoms, there are patients who 
 
 ### What we see
 
-From all vaccinated persons in the dataset, 14.7 % (1334 patients) were hospitalized and 9.6 % (873 patients) died after the Covid-19 vaccination. While for the hospitalized patients, the symptoms are quite similar to the overall common symptoms, the patients who died experienced severe symptoms like unresponsiveness to stimuli, cardiac arrest or resuscitation. 
+From all vaccinated persons in the dataset, 16.6 % (1334 patients) were hospitalized and 10.8 % (873 patients) died after the Covid-19 vaccination. While for the hospitalized patients, the symptoms are quite similar to the overall common symptoms, the patients who died experienced severe symptoms like unresponsiveness to stimuli, cardiac arrest or resuscitation. 
 
 ### What it means
 
 Based on the symptoms recorded, there is no clear difference between the frequent symptoms in the overview plot [(Question 1)](#Question-1:-What-are-the-most-common-side-effects-(symptoms)-reported-and-when-do-they-occur?) and the symptoms of hospitalized patients. Pyrexia and dyspnoea can be reasons for hospitalization but these symptoms apply only to a part of the patients. There still might be a pattern, we just cannot see it when looking at the most frequent symptoms.
 
-While the plots from [Question 1](#Question-1:-What-are-the-most-common-side-effects-(symptoms)-reported-and-when-do-they-occur?) showed that death is a frequent symptom, a closer look at the death rate helps us understand that in fact only 9.6 % of the patients who reported symptoms died after the vaccination. Compared to the other frequent symptoms, these patients experience more severe symptoms.   
+While the plots from [Question 1](#Question-1:-What-are-the-most-common-side-effects-(symptoms)-reported-and-when-do-they-occur?) showed that death is a frequent symptom, a closer look at the death rate helps us understand that in fact only 10.8 % of the patients who reported symptoms died after the vaccination. Compared to the other frequent symptoms, these patients experience more severe symptoms.   
 
 As explained above, with the current approach, we have not taken other influences into account that could be associated with the death of the patients. Fortunately, the dataset provides some additional information about the patients that we can analyze as well.
 
@@ -131,8 +135,8 @@ The patients who died were 77 years old on average. 72.5 % (633) of these patien
 
 ### What it means
 
-When we compare the age distribution and average age of all patients in the dataset with the patients who died, the average is higher for patients who died (difference: 24 years) and the distribution is sparser than the one that includes all patients. This indicates that mainly elderly people died.  
-Looking at the history of illness and current illness, the percentage of patients who died is higher for both groups. The majority of persons who died had known previous illnesses while the percentage of people with a current illness who died is twice as much as for all patients.  
+When we compare the age distribution and average age of all patients in the dataset with the patients who died, the average is higher for patients who died (difference: 24 years) and the distribution is sparser than the one that includes all patients. This indicates that mainly elderly people died. In fact, 70 % of the persons who died were 70 years old or older.  
+Looking at the history of illness and current illness, the percentage of patients who died is higher for both groups. The majority of persons who died had known previous illnesses while the percentage of people with a current illness who died is twice as much as for all patients.   
 So all of these properties could have had an influence on the death of the patients.  
 
 There would be a lot of possibilities to go more into detail on that matter. 
@@ -193,14 +197,14 @@ As metric, I used a balanced test accuracy (because the classes are imbalanced).
 ### What we see
 
 
-The prediction accuracy for hospitalization reaches 50 % with a Logistic Regression, 75 % with the Random Forest Classifier and 77 % with the Gradient Boosting Classifier. 
+The prediction accuracy for hospitalization reaches 50 % with a Logistic Regression, 78 % with the Random Forest Classifier and 77 % with the Gradient Boosting Classifier. 
 
 
 ### What it means
 
 Apparently, the algorithm could find some kind of pattern within our data. When we compare the different classifiers, we see that the Logistic Regression classifier couldn't learn from the data while both other algorithms did. 
 We shouldn't over-interpret these results right now since only 15 % of our data contains persons who were hospitalized. However, this will change once we have more data in the VAERS as is to be expected.  
-When we look back on the results for symptoms for hospitalized patients [(Question 2)](#Question-2:-Severe-symptoms---How-many-patients-had-to-be-hospitalized-or-died?), there wasn't a clear difference to the overall most frequent symptoms. 77 % accuracy is a result you would have to improve for a real use case but what it shows us is that the dataset does provide some valuable information to learn from although we might not see everything directly. 
+When we look back on the results for symptoms for hospitalized patients [(Question 2)](#Question-2:-Severe-symptoms---How-many-patients-had-to-be-hospitalized-or-died?), there wasn't a clear difference to the overall most frequent symptoms. 78 % accuracy is a result you would have to improve for a real use case but what it shows us is that the dataset does provide some valuable information to learn from although we might not see everything directly. 
 
 
 
