@@ -13,6 +13,7 @@ In this project, I analyzed data from the "Vaccine Adverse Event Reporting Syste
 <p align="center"> 
     <img src="plots/common_symptoms_no_covid.png" alt="Most common symptoms excluding positive Covid test">
  </p>
+ 
 
 * only a very small subset of the persons who got a vaccination against Covid-19 reported symptoms that might be associated with the vaccination
 * most persons in the dataset experienced lighter symptoms
@@ -22,6 +23,8 @@ In this project, I analyzed data from the "Vaccine Adverse Event Reporting Syste
 
 
 For more detailed information got to my blog post which can be found here as well as on Medium ([Link](https://medium.com/@jannine.schreiber/tired-of-fake-news-how-to-do-your-own-data-analysis-4fa7259f2f03)). 
+
+The most important visualizations can be found in my webapp: ([Link to WebApp](https://covid-vax-webapp.herokuapp.com/)).
 
 
 ## How can you use it?
